@@ -1,0 +1,19 @@
+{
+  "name": "partie2",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "johnny-five": "^2.1.0",
+    "partie2": "file:",
+    "readline": "^1.3.0",
+    "serialport": "^13.0.0"
+  },
+  "description": ""
+}
