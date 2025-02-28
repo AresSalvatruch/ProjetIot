@@ -1,0 +1,43 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arduino Web Control</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Contrôle Arduino</h1>
+
+    <h2>État de l'alarme :</h2>
+    <p id="alarmState">Non activée</p>
+
+    <h2>Mode :</h2>
+    <p id="mode">aucun detection </p>
+
+    <h2>État de la porte :</h2>
+    <p id="porteState">Fermée</p>
+
+    <h2>Commande pour désactiver l'alarme :</h2>
+    <button id="stopAlarmButton">Arrêter l'alarme</button>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+
+        socket.on('update', (data) => {
+            console.log('Received update:', data);
+            document.getElementById("alarmState").innerText = data.alarme ? "Activée" : "Désactivée";
+            document.getElementById("mode").innerText = data.mode || "Inconnu";
+            document.getElementById("porteState").innerText = data.porte || "Inconnu";
+        });
+
+        // Button to stop the alarm
+        document.getElementById("stopAlarmButton").addEventListener("click", async () => {
+            await fetch('/stop_alarm', { method: 'POST' });
+        });
+    </script>
+</body>
+</html>
